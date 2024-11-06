@@ -28,7 +28,7 @@ from homeassistant.const import (
 
 import homeassistant.helpers.config_validation as cv
 from homeassistant.helpers.restore_state import RestoreEntity
-
+from homeassistant.helpers.config_validation import make_entity_service_schema
 from .travelcalculator import TravelCalculator
 from .travelcalculator import TravelStatus
 
@@ -96,7 +96,7 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
     }
 )
 
-POSITION_SCHEMA = vol.Schema(
+POSITION_SCHEMA = make_entity_service_schema(
     {
         vol.Required(ATTR_ENTITY_ID): cv.entity_ids,
         vol.Required(ATTR_POSITION): cv.positive_int,
@@ -106,7 +106,7 @@ POSITION_SCHEMA = vol.Schema(
 )
 
 
-ACTION_SCHEMA = vol.Schema(
+ACTION_SCHEMA = make_entity_service_schema(
     {
         vol.Required(ATTR_ENTITY_ID): cv.entity_ids,
         vol.Required(ATTR_ACTION): cv.string
